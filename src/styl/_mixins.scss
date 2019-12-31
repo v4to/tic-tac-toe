@@ -1,0 +1,77 @@
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
+  @each $property in $properties {
+    #{$property}: $min-value;
+  }
+
+  @media (min-width: $min-vw) {
+    @each $property in $properties {
+      #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+    }
+  }
+
+  @media (min-width: $max-vw) {
+    @each $property in $properties {
+      #{$property}: $max-value;
+    }
+  }
+}
+
+$browser-context: 16;
+@function em($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1em;
+}
+
+$root-context: 16;
+@function rem($pixels, $context: $root-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1rem;
+}
+
+@mixin bMobile() {
+  @media (min-width: 320px) {
+    @content;
+  }
+}
+
+@mixin bTablet() {
+  @media (min-width: 760px) {
+    @content;
+  }
+}
+
+@mixin bDesktop() {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin fFace($fontFamily, $fontFileName) {
+  @font-face {
+    font-family: $fontFamily;
+    src: url("/fonts/#{$fontFileName}.woff2") format("woff2"),
+    url("/fonts/#{$fontFileName}.woff") format("woff");
+  }
+}
