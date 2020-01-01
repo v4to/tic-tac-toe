@@ -39,7 +39,11 @@ gulp.task('clean', () => {
 
 gulp.task('js', () => {
   return gulp.src('src/js/index.js')
+    .pipe(plumber({
+      errorHandler: notify.onError()
+    }))
     .pipe(webpack({
+      mode: 'development',
       output: {
         filename: 'index.js'
       },

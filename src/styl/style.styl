@@ -2,4 +2,61 @@
 @import "reset.styl"
 
 body
-  background-color red
+  background-color #20c1f1
+  display flex
+  flex-direction column
+  align-items center
+  justify-content space-around
+  height 100vh
+  color #fff
+
+.new-game,
+.new-game-form
+  background-color #20c1f1
+  border 5px solid #fff
+  border-radius 10px
+  padding 10px
+  color #fff
+  font-size 20px
+  font-weight bold
+  cursor pointer
+
+.new-game-form
+  display flex
+  width 700px
+  justify-content space-between
+  padding 20px
+
+
+.new-game-form input
+  border-radius 10px
+  display inline-block
+  border none
+  padding 10px
+
+.board
+  border-collapse collapse
+  border-radius 10px
+  table-layout fixed
+  overflow hidden
+  text-align center
+
+
+.board td
+  border 10px solid white
+  padding 0
+  margin 0
+  width 150px
+  height 150px
+  font-size 100px
+  font-weight bold
+  vertical-align middle
+
+.board
+  display none
+
+.winner
+  font-size 20px
+  font-weight: bold;
+
+
